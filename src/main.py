@@ -1,10 +1,9 @@
-# import sys
+from pathlib import Path
+from PIL import Image
 import open3d as o3d
 import numpy as np
 from numpy.typing import NDArray
-from PIL import Image
 import click
-from pathlib import Path
 
 
 def get_uv(vertex_colors: NDArray, colors: int):
@@ -34,11 +33,14 @@ def get_uv(vertex_colors: NDArray, colors: int):
 @click.argument("out_mesh", type=click.Path(path_type=Path), required=True)
 @click.argument("out_texture", type=click.Path(path_type=Path), required=True)
 @click.option("--colors", type=int, default=64)
-def main(in_mesh: Path, out_mesh: Path, out_texture: Path, colors: int):
+@click.option("--write-vc", is_flag=True)
+def main(in_mesh: Path, out_mesh: Path, out_texture: Path, colors: int, write_vc: bool):
     in_mesh_str = str(in_mesh.resolve())
 
     print(f"loading {in_mesh_str}")
     mesh = o3d.io.read_triangle_mesh(in_mesh_str)
+
+    assert len(mesh.vertices) == len(mesh.vertex_colors), "Wrong vertex color data"
 
     print("calculating uv")
     vertex_colors = np.asarray(mesh.vertex_colors)
@@ -67,7 +69,7 @@ def main(in_mesh: Path, out_mesh: Path, out_texture: Path, colors: int):
 
     out_mesh_str = str(out_mesh.resolve())
     print(f"saving mesh to {out_mesh_str}")
-    o3d.io.write_triangle_mesh(out_mesh_str, mesh)
+    o3d.io.write_triangle_mesh(out_mesh_str, mesh, write_vertex_colors=write_vc, print_progress=True)
 
     print("done")
 
