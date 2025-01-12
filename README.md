@@ -21,11 +21,8 @@ python src/main.py input_mesh.gltf output_mesh.obj output_palette.png
 
 Left side: original mesh with vertex color, Right side: mesh textured with palette
 
-<img src="example/vcolor1.png" alt="Vertex Color Image" title="Vertex Color" height="350px">
-<img src="example/textured1.png" alt="Textured Image" title="Textured" height="350px">
+<img src="example/vcolor1.png" alt="Vertex Color Image" title="Vertex Color" height="350px"> <img src="example/textured1.png" alt="Textured Image" title="Textured" height="350px">
 
-<img src="example/vcolor2.png" alt="Vertex Color Image" title="Vertex Color" height="350px">
-<img src="example/textured2.png" alt="Textured Image" title="Textured" height="350px">
-
+<img src="example/vcolor2.png" alt="Vertex Color Image" title="Vertex Color" height="350px"> <img src="example/textured2.png" alt="Textured Image" title="Textured" height="350px">
 
 
